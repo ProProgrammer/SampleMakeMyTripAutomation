@@ -24,6 +24,7 @@ FROM_CITY = 'BLR'
 TO_CITY = 'DEL'
 DATEPICKER_MONTH_XPATH = '//*[@id="ui-datepicker-div"]/div[2]/div/div/span[1]'
 DATEPICKER_YEAR_XPATH = '//*[@id="ui-datepicker-div"]/div[2]/div/div/span[2]'
+SEARCH_BUTTON_ID = "flights_submit"
 
 
 class mmtAutomation(unittest.TestCase):
@@ -32,24 +33,24 @@ class mmtAutomation(unittest.TestCase):
         """
         Setup class for test cases in mmtAutomation Class
         """
-        # firefox_profile = webdriver.FirefoxProfile()
+        firefox_profile = webdriver.FirefoxProfile()
         self.driver = webdriver.Firefox()
 
     def tearDown(self):
         driver = self.driver
         driver.close()
 
-    def test_001_load_webpage(self):
+    # def test_001_load_webpage(self):
         
-        try:
-            driver = self.driver
-            driver.get(URL)
-            self.assertTrue(MAKE_MY_TRIP in driver.title)
+        # try:
+            # driver = self.driver
+            # driver.get(URL)
+            # self.assertTrue(MAKE_MY_TRIP in driver.title)
         
-        except Exception as e:
-            print e
+        # except Exception as e:
+            # print e
     
-    def test_002_Search_Flight(self):
+    def test_001_Search_Flight(self):
         try:
             driver = self.driver
             driver.get(URL)
@@ -74,7 +75,8 @@ class mmtAutomation(unittest.TestCase):
             returnDateField.click()
             driver.find_element_by_link_text("%s" % (day+1)).click()
             
-            
+            search_button = driver.find_element_by_id(SEARCH_BUTTON_ID)
+            search_button.click()
             
             # MONTH = driver.find_element_by_xpath(DATEPICKER_MONTH_XPATH)
             # YEAR = driver.find_element_by_xpath(DATEPICKER_YEAR_XPATH)
