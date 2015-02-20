@@ -1,3 +1,4 @@
+import time
 import datetime
 import unittest
 from selenium import webdriver
@@ -25,7 +26,7 @@ TO_CITY = 'DEL'
 DATEPICKER_MONTH_XPATH = '//*[@id="ui-datepicker-div"]/div[2]/div/div/span[1]'
 DATEPICKER_YEAR_XPATH = '//*[@id="ui-datepicker-div"]/div[2]/div/div/span[2]'
 SEARCH_BUTTON_ID = "flights_submit"
-
+MODAL_DIALOG_CLASS = 'modal-dialog'
 
 class mmtAutomation(unittest.TestCase):
 
@@ -77,6 +78,12 @@ class mmtAutomation(unittest.TestCase):
             
             search_button = driver.find_element_by_id(SEARCH_BUTTON_ID)
             search_button.click()
+            time.sleep(5)
+            
+            modal_dialog = driver.find_element_by_class_name(MODAL_DIALOG_CLASS)
+            
+            if modal_dialog:
+                driver.find_element_by_link_text('Search Flight').click()
             
             # MONTH = driver.find_element_by_xpath(DATEPICKER_MONTH_XPATH)
             # YEAR = driver.find_element_by_xpath(DATEPICKER_YEAR_XPATH)
