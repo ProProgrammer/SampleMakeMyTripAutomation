@@ -98,7 +98,8 @@ class mmtAutomation(unittest.TestCase):
             book_button_footer.click()
             
             try:
-                confirm_modal_dialog = driver.find_element_by_id(CONFIRM_MODAL_DIALOG_ID)
+                # confirm_modal_dialog = driver.find_element_by_id(CONFIRM_MODAL_DIALOG_ID)
+                confirm_modal_dialog = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, CONFIRM_MODAL_DIALOG_ID)))
                 driver.find_element_by_link_text('Continue to Book').click()
             except:
                 pass
